@@ -1,0 +1,140 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"bookstore-shell": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:class": {
+					"skipTests": true
+				},
+				"@schematics/angular:component": {
+					"skipTests": true
+				},
+				"@schematics/angular:directive": {
+					"skipTests": true
+				},
+				"@schematics/angular:guard": {
+					"skipTests": true
+				},
+				"@schematics/angular:interceptor": {
+					"skipTests": true
+				},
+				"@schematics/angular:pipe": {
+					"skipTests": true
+				},
+				"@schematics/angular:resolver": {
+					"skipTests": true
+				},
+				"@schematics/angular:service": {
+					"skipTests": true
+				}
+			},
+			"root": "projects/bookstore-shell",
+			"sourceRoot": "projects/bookstore-shell/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/bookstore-shell",
+						"index": "projects/bookstore-shell/src/index.html",
+						"main": "projects/bookstore-shell/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/bookstore-shell/tsconfig.app.json",
+						"assets": [
+							"projects/bookstore-shell/src/favicon.ico",
+							"projects/bookstore-shell/src/assets"
+						],
+						"styles": [
+							"projects/bookstore-shell/src/styles.css",
+							"node_modules/bootstrap/dist/css/bootstrap.css"
+						],
+						"scripts": [
+							"node_modules/jquery/dist/jquery.js",
+							"node_modules/bootstrap/dist/js/bootstrap.js"
+						],
+						"extraWebpackConfig": "projects/bookstore-shell/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/bookstore-shell/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "bookstore-shell:build:production",
+							"extraWebpackConfig": "projects/bookstore-shell/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "bookstore-shell:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 5000,
+						"publicHost": "http://localhost:5000",
+						"extraWebpackConfig": "projects/bookstore-shell/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "bookstore-shell:build",
+						"extraWebpackConfig": "projects/bookstore-shell/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/bookstore-shell/tsconfig.spec.json",
+						"assets": [
+							"projects/bookstore-shell/src/favicon.ico",
+							"projects/bookstore-shell/src/assets"
+						],
+						"styles": [
+							"projects/bookstore-shell/src/styles.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"analytics": "f07d0919-7945-4a52-8999-b26b17d086da"
+	}
+}
